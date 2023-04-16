@@ -7,15 +7,7 @@ const cardList = ({ monsters }) => {
   return (
     <CardListMain>
       {monsters.map((monster) => {
-        const { name, email, id } = monster;
-        return (
-          <Card
-            key={id}
-            email={email}
-            imgSource={`https://robohash.org/${id}/set=3&size=180x180`}
-            name={name}
-          />
-        );
+        return <Card key={monster.id} monster={monster} />;
       })}
     </CardListMain>
   );

@@ -7,15 +7,11 @@ import SearchBox from "./components/SearchBox/SearchBox";
 
 function App() {
   const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchValue, setSearchValue] = useState("");
-
   const onChangeSearch = (value) => {
     setSearchValue(value.toLocaleLowerCase());
   };
-
-  const filteredList = monsters.filter((monster) => {
-    return monster.name.toLocaleLowerCase().includes(searchValue);
-  });
 
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -27,12 +23,19 @@ function App() {
     return () => setMonsters([]);
   }, []);
 
+  useEffect(() => {
+    const filteredList = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchValue);
+    });
+    setFilteredMonsters(filteredList);
+  }, [monsters, searchValue]);
+
   return (
     <div className="App">
       <Container>
         <TitleContainer>Monsters Rolodex</TitleContainer>
         <SearchBox onChangeSearch={(value) => onChangeSearch(value)} />
-        <CardList monsters={filteredList} />
+        <CardList monsters={filteredMonsters} />
       </Container>
     </div>
   );

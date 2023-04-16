@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = ({ email, name, imgSource }) => {
+const Card = ({ monster }) => {
+  const { id, name, email } = monster;
   return (
     <CardContainer>
-      <img alt={name} src={imgSource} />
+      <img alt={name} src={`https://robohash.org/${id}/set=3&size=180x180`} />
       <h2>{name}</h2>
       <p>{email}</p>
     </CardContainer>
