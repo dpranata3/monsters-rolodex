@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import './App.css';
 
 import CardList from "./components/CardList/CardList";
@@ -28,10 +29,19 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBox onChangeSearch={(value) => onChangeSearch(value)} />
-      <CardList monsters={filteredList} />
+      <Container>
+        <SearchBox onChangeSearch={(value) => onChangeSearch(value)} />
+        <CardList monsters={filteredList} />
+      </Container>
     </div>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+`
