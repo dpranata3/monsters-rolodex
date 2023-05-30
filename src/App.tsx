@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import "./App.css";
@@ -5,11 +6,13 @@ import "./App.css";
 import CardList from "./components/CardList/CardList";
 import SearchBox from "./components/SearchBox/SearchBox";
 
+import { Monster } from "./utils/types";
+
 function App() {
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchValue, setSearchValue] = useState("");
-  const onChangeSearch = (value) => {
+  const onChangeSearch = (value: string) => {
     setSearchValue(value.toLocaleLowerCase());
   };
 
@@ -19,12 +22,12 @@ function App() {
       .then((users) => setMonsters(users))
       .catch((errors) => console.error(errors));
 
-    /** when component is unmounted */
     return () => setMonsters([]);
   }, []);
 
+
   useEffect(() => {
-    const filteredList = monsters.filter((monster) => {
+    const filteredList = monsters.filter((monster: Monster) => {
       return monster.name.toLocaleLowerCase().includes(searchValue);
     });
     setFilteredMonsters(filteredList);
@@ -34,7 +37,7 @@ function App() {
     <div className="App">
       <Container>
         <TitleContainer>Monsters Rolodex</TitleContainer>
-        <SearchBox onChangeSearch={(value) => onChangeSearch(value)} />
+        <SearchBox onChangeSearch={(value: string) => onChangeSearch(value)} />
         <CardList monsters={filteredMonsters} />
       </Container>
     </div>
