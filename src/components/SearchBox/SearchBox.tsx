@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const searchBox = ({ onChangeSearch }) => {
+const searchBox = ({ onChangeSearch }: { onChangeSearch: Function }) => {
   return (
     <Container
       className="search-box"

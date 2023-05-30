@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import Card from "../Card/Card";
+import { Monster } from "../../utils/types";
 
-const cardList = ({ monsters }) => {
+const cardList = ({ monsters }: { monsters: Array<Monster> }) => {
   return (
     <CardListMain>
-      {monsters.map((monster) => {
+      {monsters.map((monster: Monster) => {
         return <Card key={monster.id} monster={monster} />;
       })}
     </CardListMain>

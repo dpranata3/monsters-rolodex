@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Card = ({ monster }) => {
+import { Monster } from "../../utils/types";
+
+const Card = ({ monster }: { monster: Monster }) => {
   const { id, name, email } = monster;
   return (
     <CardContainer>
