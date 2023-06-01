@@ -3,7 +3,11 @@ import styled from "styled-components";
 
 import { Monster } from "../../utils/types";
 
-const Card = ({ monster }: { monster: Monster }) => {
+type TCardProps = {
+  monster: Monster;
+};
+
+const Card = ({ monster }: TCardProps) => {
   const { id, name, email } = monster;
   return (
     <CardContainer>
