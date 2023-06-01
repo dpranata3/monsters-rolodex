@@ -1,13 +1,18 @@
-import React from "react";
+import { ChangeEvent } from "react";
 import styled from "styled-components";
 
-const searchBox = ({ onChangeSearch }: { onChangeSearch: Function }) => {
+interface ISearchBoxProps {
+  placeholder?: string;
+  onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+const searchBox = ({ onSearchChange, placeholder }: ISearchBoxProps) => {
   return (
     <Container
       className="search-box"
       type="text"
-      placeholder="search monsters"
-      onChange={(event) => onChangeSearch(event.target.value)}
+      placeholder={placeholder}
+      onChange={onSearchChange}
     />
   );
 };

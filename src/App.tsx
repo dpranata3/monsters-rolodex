@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import styled from "styled-components";
 import "./App.css";
 
@@ -7,20 +6,26 @@ import CardList from "./components/CardList/CardList";
 import SearchBox from "./components/SearchBox/SearchBox";
 
 import { Monster } from "./utils/types";
+import { getData } from "./utils/data.utils";
 
 function App() {
-  const [monsters, setMonsters] = useState([]);
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchValue, setSearchValue] = useState("");
-  const onChangeSearch = (value: string) => {
-    setSearchValue(value.toLocaleLowerCase());
+
+  const onSearchChange = (event:ChangeEvent<HTMLInputElement>): void => {
+    setSearchValue(event.target.value.toLocaleLowerCase());
   };
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => setMonsters(users))
-      .catch((errors) => console.error(errors));
+    const fetchUsers = async () => {
+      const users = await getData<Monster[]>(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+      setMonsters(users);
+    }
+
+    fetchUsers();
 
     return () => setMonsters([]);
   }, []);
@@ -37,7 +42,10 @@ function App() {
     <div className="App">
       <Container>
         <TitleContainer>Monsters Rolodex</TitleContainer>
-        <SearchBox onChangeSearch={(value: string) => onChangeSearch(value)} />
+        <SearchBox
+          onSearchChange={onSearchChange}
+          placeholder="search monsters"
+        />
         <CardList monsters={filteredMonsters} />
       </Container>
     </div>

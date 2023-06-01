@@ -1,10 +1,13 @@
-import React from "react";
 import styled from "styled-components";
 
 import Card from "../Card/Card";
 import { Monster } from "../../utils/types";
 
-const cardList = ({ monsters }: { monsters: Array<Monster> }) => {
+type TCardListProps = {
+  monsters: Monster[];
+}
+
+const cardList = ({ monsters }: TCardListProps) => {
   return (
     <CardListMain>
       {monsters.map((monster: Monster) => {
