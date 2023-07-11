@@ -7,7 +7,7 @@ type TCardProps = {
   monster: Monster;
 };
 
-const Card = ({ monster }: TCardProps) => {
+const Card: React.FC<TCardProps> = ({ monster }) => {
   const { id, name, email } = monster;
   return (
     <CardContainer>

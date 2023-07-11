@@ -1,6 +1,5 @@
 import { ChangeEvent } from "react";
 import styled from "styled-components";
-
 interface ISearchBoxProps {
   placeholder?: string;
   onSearchChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -9,6 +8,7 @@ interface ISearchBoxProps {
 const searchBox = ({ onSearchChange, placeholder }: ISearchBoxProps) => {
   return (
     <Container
+      id="search-box"
       className="search-box"
       type="text"
       placeholder={placeholder}
