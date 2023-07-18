@@ -16,16 +16,23 @@ const MainPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const users = await getData<Monster[]>(
-        "https://jsonplaceholder.typicode.com/users"
-      );
-      setMonsters(users);
-    };
+    const controller = new AbortController();
 
+    const fetchUsers = async () => {
+      try {
+        const users = await getData<Monster[]>(
+          "https://jsonplaceholder.typicode.com/users",
+          { signal: controller.signal }
+        );
+        setMonsters(users);
+      } catch (error) {
+        window.alert(error);
+      }
+    };
+ 
     fetchUsers();
 
-    return () => setMonsters([]);
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
